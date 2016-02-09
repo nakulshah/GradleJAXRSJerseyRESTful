@@ -1,0 +1,22 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    
+    compile "javax.ws.rs:jsr311-api:1.1.1"
+
+    compile 'com.sun.jersey:jersey-server:1.13'
+    compile 'com.sun.jersey:jersey-core:1.13'
+    compile 'com.sun.jersey:jersey-servlet:1.13'
+
+    testCompile 'junit:junit:4.12'
+
+}
