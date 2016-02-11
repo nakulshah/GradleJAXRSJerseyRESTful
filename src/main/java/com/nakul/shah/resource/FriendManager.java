@@ -29,9 +29,11 @@ public class FriendManager
 		}
 	}
 	
-	public void AddFriend(String name)
+	public int AddFriend(String name)
 	{
-		friendList.put(atomicInt.incrementAndGet(), name);
+		int id = atomicInt.incrementAndGet();
+		friendList.put(id, name);
+		return id;
 	}
 	
 	public Friend GetFriendByName(String name)
@@ -60,16 +62,26 @@ public class FriendManager
 		
 		while(it.hasNext())
 		{
-			allFriends[i] = new Friend(it.getValue(), it.getKey());
+			int k = it.next();
+			allFriends[i] = new Friend(friendList.get(k), k);
 			i++;
 		}
 		
 		return allFriends;
 	}
 	
-	public boolean UpdateFriend() throws Exception
+	public boolean UpdateFriend(int id, String name) 
 	{
-		throw new Exception("method not implemented yet");
+		boolean toReturn = false;
+		
+		if(friendList.containsKey(id))
+		{
+			friendList.remove(id);
+			friendList.put(id, name);
+			toReturn = true;
+		}
+		
+		return toReturn;
 	}
 	
 	
